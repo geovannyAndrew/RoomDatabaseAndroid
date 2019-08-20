@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick({R.id.buttonCourses})
+    public void goToCourseActivity(){
+        Intent intent = new Intent(this,CourseActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

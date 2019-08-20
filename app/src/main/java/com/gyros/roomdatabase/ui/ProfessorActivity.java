@@ -36,12 +36,19 @@ public class ProfessorActivity extends AppCompatActivity {
     EditText editEmail;
 
     CompositeDisposable disposables = new CompositeDisposable();
+    Professor professor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
         ButterKnife.bind(this);
+        creatingProfessorModifiable();
+    }
+
+    @OnClick(R.id.buttonRxJust)
+    public void onModifyProfessor(){
+        professor.setName("Otro nombre");
     }
 
 
@@ -284,6 +291,39 @@ public class ProfessorActivity extends AppCompatActivity {
                 Log.d(TAG,"onComplete");
             }
         });
+    }
+
+
+    private void creatingProfessorModifiable(){
+        professor = new Professor();
+        professor.setId(1);
+        professor.setName("Name");
+        professor.setEmail("otro@email.com");
+        Observable.just(professor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Professor>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposables.add(d);
+                        Log.d(TAG,"onSubscribe ");
+                    }
+
+                    @Override
+                    public void onNext(Professor professor) {
+                        Log.d(TAG,"Professor "+professor.getName());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG,"onError ");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG,"onComplete ");
+                    }
+                });
     }
 
 
