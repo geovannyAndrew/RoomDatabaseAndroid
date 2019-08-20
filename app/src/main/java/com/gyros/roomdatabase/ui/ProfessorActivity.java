@@ -16,11 +16,13 @@ import java.util.concurrent.Callable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class ProfessorActivity extends AppCompatActivity {
@@ -89,7 +91,22 @@ public class ProfessorActivity extends AppCompatActivity {
         deleteProfessorById(professor);
     }
 
-    public void deleteProfessorById(Professor professor){
+    @OnClick(R.id.buttonDelete)
+    public void onDeleteAllProfessors(){
+        deleteAllProfessors();
+    }
+
+    private void deleteAllProfessors(){
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                AppDatabase.getAppDatabase(ProfessorActivity.this)
+                        .professorDao().deleteAllProfessors();
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+    private void deleteProfessorById(Professor professor){
         Observable<Professor> observable = Observable.fromCallable(new Callable<Professor>() {
             @Override
             public Professor call() throws Exception {
