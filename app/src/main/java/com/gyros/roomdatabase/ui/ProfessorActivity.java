@@ -67,7 +67,123 @@ public class ProfessorActivity extends AppCompatActivity {
         onGetProffesorByName(name);
     }
 
-    public void onGetProffesorByName(final String name){
+    @OnClick(R.id.buttonSearchById)
+    public void onGetProfessorById(){
+        int id = 2;
+        getProfessorById(id);
+    }
+
+    @OnClick(R.id.buttonUpdate)
+    public void updateProfessor(){
+        Professor professor = new Professor();
+        professor.setId(2);
+        professor.setName("Name Modified");
+        professor.setEmail("Email Modified");
+        updateProfessorById(professor);
+    }
+
+    @OnClick(R.id.buttonDeleteById)
+    public void deleteProfessor(){
+        Professor professor = new Professor();
+        professor.setId(2);
+        deleteProfessorById(professor);
+    }
+
+    public void deleteProfessorById(Professor professor){
+        Observable<Professor> observable = Observable.fromCallable(new Callable<Professor>() {
+            @Override
+            public Professor call() throws Exception {
+                AppDatabase.getAppDatabase(ProfessorActivity.this).professorDao().deleteProfessorById(professor);
+                return professor;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<Professor>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                disposables.add(d);
+            }
+
+            @Override
+            public void onNext(Professor professor) {
+                Log.d(TAG,"onNext: Deleted: "+professor.getName());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG,"onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"onComplete: ");
+            }
+        });
+    }
+
+    private void updateProfessorById(Professor professor){
+        Observable<Professor> observable = Observable.fromCallable(new Callable<Professor>() {
+            @Override
+            public Professor call() throws Exception {
+                AppDatabase.getAppDatabase(ProfessorActivity.this)
+                        .professorDao().updateProfessorById(professor);
+                return professor;
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<Professor>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                disposables.add(d);
+            }
+
+            @Override
+            public void onNext(Professor professor) {
+                Log.d(TAG,"onNext: Name: "+professor.getName());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG,"onError");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"onComplete: ");
+            }
+        });
+    }
+
+
+    private void getProfessorById(int id){
+        Observable<Professor> observable = Observable.fromCallable(new Callable<Professor>() {
+            @Override
+            public Professor call() throws Exception {
+                return AppDatabase.getAppDatabase(ProfessorActivity.this).professorDao().findProfessorById(id);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Observer<Professor>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                disposables.add(d);
+            }
+
+            @Override
+            public void onNext(Professor professor) {
+                Log.d(TAG,"onNext: Name: "+professor.getName());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG,"onError: ");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"onComplete: ");
+            }
+        });
+    }
+
+    private void onGetProffesorByName(final String name){
         Observable<List<Professor>> observable = Observable.fromCallable(new Callable<List<Professor>>() {
             @Override
             public List<Professor> call() throws Exception {
