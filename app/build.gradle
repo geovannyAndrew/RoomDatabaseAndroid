@@ -25,6 +25,8 @@ android {
 
 def room_version = '2.2.0-alpha02'
 def butterknife_version = '10.1.0'
+def rxjava_version = '2.2.7'
+def rxandroid_version = '2.1.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -36,10 +38,20 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     //Butterknife
     implementation "com.jakewharton:butterknife:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    // RxJava Call Adapter
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
+
+    // RxAndroid
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 }

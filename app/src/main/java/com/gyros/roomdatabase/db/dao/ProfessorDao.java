@@ -21,7 +21,7 @@ public interface ProfessorDao {
     List<Professor> getAllProfessors();
 
     @Query("SELECT * FROM "+Constants.NAME_TABLE_PROFESSOR+" WHERE name LIKE :name")
-    Professor findProfessorByName(String name);
+    List<Professor> findProfessorsByName(String name);
 
     @Query("SELECT * FROM "+Constants.NAME_TABLE_PROFESSOR+" WHERE id = :id")
     Professor findProfessorById(int id);
