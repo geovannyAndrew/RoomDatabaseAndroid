@@ -3,11 +3,14 @@ package com.gyros.roomdatabase.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.gyros.roomdatabase.R;
 import com.gyros.roomdatabase.db.database.AppDatabase;
 import com.gyros.roomdatabase.db.entity.Course;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,6 +21,8 @@ import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class CourseActivity extends AppCompatActivity {
+
+    public static final String TAG = "CourseActivity";
 
     @BindView(R.id.courseActivityIdProfesor)
     EditText editIdProfessor;
@@ -45,5 +50,17 @@ public class CourseActivity extends AppCompatActivity {
         course.setProfessorId(professorId);
         Completable.fromAction(() -> AppDatabase.getAppDatabase(CourseActivity.this)
                 .courseDao().insert(course)).subscribeOn(Schedulers.io()).subscribe();
+    }
+
+
+    @OnClick(R.id.courseActivityBtLeerCursosPorProfesor)
+    public void onGetCoursesByProfessor(){
+        int professorId = Integer.parseInt(editIdProfessor.getText().toString());
+        Completable.fromAction(() -> {
+            List<Course> courses = AppDatabase.getAppDatabase(CourseActivity.this)
+                    .courseDao().findCoursesByProfessor(professorId);
+
+            Log.d(TAG,"Number courses: "+courses.size());
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 }
