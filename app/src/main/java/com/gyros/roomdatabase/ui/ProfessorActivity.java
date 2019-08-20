@@ -43,7 +43,7 @@ public class ProfessorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor);
         ButterKnife.bind(this);
-        creatingProfessorModifiable();
+        //creatingProfessorModifiable();
     }
 
     @OnClick(R.id.buttonRxJust)
