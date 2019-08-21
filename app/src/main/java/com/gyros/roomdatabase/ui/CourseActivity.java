@@ -75,4 +75,13 @@ public class CourseActivity extends AppCompatActivity {
         Completable.fromAction(() -> AppDatabase.getAppDatabase(CourseActivity.this)
                 .courseDao().updateCourseById(course)).subscribeOn(Schedulers.io()).subscribe();
     }
+
+
+    @OnClick(R.id.courseActivityBtBorrarCursosPorId)
+    public void onDeleteCourseById(){
+        Course course = new Course();
+        course.setId(1);
+        Completable.fromAction(() -> AppDatabase.getAppDatabase(CourseActivity.this)
+                .courseDao().deleteCourseById(course)).subscribeOn(Schedulers.io()).subscribe();
+    }
 }
