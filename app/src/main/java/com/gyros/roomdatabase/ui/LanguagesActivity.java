@@ -60,11 +60,24 @@ public class LanguagesActivity extends AppCompatActivity {
 
     @OnClick(R.id.buttonUpdateLanguage)
     public void onUpdateLanguage(){
+        Language language = new Language();
+        language.setId(2);
+        language.setName("Language Updated");
+        updateLanguage(language);
+    }
 
+    private void updateLanguage(Language language){
+        Completable.fromAction(() -> AppDatabase.getAppDatabase(LanguagesActivity.this).languagesDao().updateLanguage(language)).subscribeOn(Schedulers.io()).subscribe();
     }
 
     @OnClick(R.id.buttonDeleteLanguage)
     public void onDeleteLanguage(){
+        Language language = new Language();
+        language.setId(1);
+        deleteLanguage(language);
+    }
 
+    private void deleteLanguage(Language language){
+        Completable.fromAction(() -> AppDatabase.getAppDatabase(LanguagesActivity.this).languagesDao().deleteLanguage(language)).subscribeOn(Schedulers.io()).subscribe();
     }
 }

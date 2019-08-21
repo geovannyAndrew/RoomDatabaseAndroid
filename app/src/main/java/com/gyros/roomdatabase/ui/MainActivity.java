@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.buttonProfessorLanguages)
+    public void goToProfessorLanguagesActivity(){
+        Intent intent = new Intent(this,ProfessorLanguageActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }
