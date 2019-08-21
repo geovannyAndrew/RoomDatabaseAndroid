@@ -63,4 +63,16 @@ public class CourseActivity extends AppCompatActivity {
             Log.d(TAG,"Number courses: "+courses.size());
         }).subscribeOn(Schedulers.io()).subscribe();
     }
+
+
+    @OnClick(R.id.courseActivityBtActualizarCursosPorId)
+    public void onUpdateCourseById(){
+        Course course = new Course();
+        course.setId(1);
+        course.setDuration(60);
+        course.setName("Name Course Modified");
+        course.setProfessorId(1);
+        Completable.fromAction(() -> AppDatabase.getAppDatabase(CourseActivity.this)
+                .courseDao().updateCourseById(course)).subscribeOn(Schedulers.io()).subscribe();
+    }
 }
