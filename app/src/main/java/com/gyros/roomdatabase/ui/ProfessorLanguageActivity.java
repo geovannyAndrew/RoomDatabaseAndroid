@@ -9,6 +9,7 @@ import com.gyros.roomdatabase.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProfessorLanguageActivity extends AppCompatActivity {
 
@@ -23,5 +24,21 @@ public class ProfessorLanguageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_language);
         ButterKnife.bind(this);
+    }
+
+
+    @OnClick(R.id.buttonSaveProfessorLanguage)
+    public void onSaveProfessorLanguage(){
+
+    }
+
+    @OnClick(R.id.buttonGetProfessor)
+    public void getProfessor(){
+
+    }
+
+    @OnClick(R.id.buttonGetLanguage)
+    public void getLanguage(){
+
     }
 }
