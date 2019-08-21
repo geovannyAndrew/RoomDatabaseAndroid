@@ -11,17 +11,20 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.gyros.roomdatabase.constants.Constants;
 import com.gyros.roomdatabase.db.dao.CourseDao;
+import com.gyros.roomdatabase.db.dao.LanguagesDao;
 import com.gyros.roomdatabase.db.dao.ProfessorDao;
 import com.gyros.roomdatabase.db.entity.Course;
+import com.gyros.roomdatabase.db.entity.Language;
 import com.gyros.roomdatabase.db.entity.Professor;
 
 @Database(
-        entities = {Professor.class, Course.class},
-        version = 2
+        entities = {Professor.class, Course.class, Language.class},
+        version = 3
 )
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ProfessorDao professorDao();
     public abstract CourseDao courseDao();
+    public abstract LanguagesDao languagesDao();
 
 
     private static AppDatabase INSTANCE;
@@ -34,6 +37,7 @@ public abstract class AppDatabase extends RoomDatabase {
                     Constants.NAME_DATABASE
             )
             .addMigrations(MIGRATION_1_2)
+            .addMigrations(MIGRATION_2_3)
             .build();
         }
         return INSTANCE;
@@ -47,6 +51,14 @@ public abstract class AppDatabase extends RoomDatabase {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
             database.execSQL("CREATE TABLE "+Constants.NAME_TABLE_COURSES+" (id INTEGER PRIMARY KEY NOT NULL, name TEXT, duration INTEGER NOT NULL, professor_id INTEGER NOT NULL, foreign key (professor_id) references "+Constants.NAME_TABLE_PROFESSOR+"(id) ON DELETE CASCADE)");
+        }
+    };
+
+
+    static final Migration MIGRATION_2_3 = new Migration(2,3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL("CREATE TABLE "+Constants.NAME_TABLE_LANGUAGES+" (id INTEGER PRIMARY KEY NOT NULL, name TEXT)");
         }
     };
 }
