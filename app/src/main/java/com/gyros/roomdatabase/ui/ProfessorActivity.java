@@ -52,7 +52,7 @@ public class ProfessorActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.buttonSave)
+    @OnClick(R.id.buttonSaveLanguage)
     public void onSave(){
         String name = editName.getText().toString();
         String email = editEmail.getText().toString();

@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/buttonSaveLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -61,7 +61,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonSearchByName"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSaveLanguage" />
 
     <Button
         android:id="@+id/buttonSearchByName"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toStartOf="@+id/buttonSearchById"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonRead"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSaveLanguage" />
 
     <Button
         android:id="@+id/buttonSearchById"
@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonSearchByName"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSaveLanguage" />
 
     <Button
         android:id="@+id/buttonUpdate"
