@@ -20,12 +20,16 @@ public interface ProfessorLanguageDao {
     @Query("SELECT * FROM "+ Constants.NAME_TABLE_PROFESSOR+
             " INNER JOIN "+Constants.NAME_TABLE_PROFESSORS_LANGUAGES
             +" ON "+Constants.NAME_TABLE_PROFESSOR+".id = "+Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".professor_id WHERE "
-            +Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".professor_id = :idLanguage")
+            +Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".language_id = :idLanguage")
     List<Professor> getProfessorsByLanguage(int idLanguage);
 
     @Query("SELECT * FROM "+ Constants.NAME_TABLE_LANGUAGES+
             " INNER JOIN "+Constants.NAME_TABLE_PROFESSORS_LANGUAGES
             +" ON "+Constants.NAME_TABLE_LANGUAGES+".id = "+Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".language_id WHERE "
-            +Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".language_id = :idProfessor")
+            +Constants.NAME_TABLE_PROFESSORS_LANGUAGES+".professor_id = :idProfessor")
     List<Language> getLanguagesByProfessor(int idProfessor);
+
+
+    @Query("SELECT * FROM "+ Constants.NAME_TABLE_PROFESSORS_LANGUAGES)
+    List<ProfessorLanguage> getAllProfessorsLanguages();
 }

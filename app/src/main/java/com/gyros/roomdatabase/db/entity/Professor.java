@@ -4,8 +4,11 @@ package com.gyros.roomdatabase.db.entity;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 
 import com.gyros.roomdatabase.constants.Constants;
+
+import java.util.List;
 
 @Entity(tableName = Constants.NAME_TABLE_PROFESSOR)
 public class Professor {

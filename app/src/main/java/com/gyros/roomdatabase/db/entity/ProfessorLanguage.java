@@ -13,12 +13,14 @@ import com.gyros.roomdatabase.constants.Constants;
                 @ForeignKey(
                         entity = Professor.class,
                         parentColumns = "id",
-                        childColumns = "professor_id"
+                        childColumns = "professor_id",
+                        onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
                         entity = Language.class,
                         parentColumns = "id",
-                        childColumns = "language_id"
+                        childColumns = "language_id",
+                        onDelete = ForeignKey.CASCADE
                 )
         }
 )

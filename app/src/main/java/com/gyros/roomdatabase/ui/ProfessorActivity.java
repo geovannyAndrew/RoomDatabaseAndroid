@@ -9,6 +9,7 @@ import android.widget.EditText;
 import com.gyros.roomdatabase.R;
 import com.gyros.roomdatabase.db.database.AppDatabase;
 import com.gyros.roomdatabase.db.entity.Professor;
+import com.gyros.roomdatabase.db.noentities.ProfessorWithCourses;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -324,6 +325,20 @@ public class ProfessorActivity extends AppCompatActivity {
                         Log.d(TAG,"onComplete ");
                     }
                 });
+    }
+
+    @OnClick(R.id.buttonGetProfessorsWithCourses)
+    public void onGetAllProffessorsWithCourses(){
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                List<ProfessorWithCourses> professorsWithCourses = AppDatabase.getAppDatabase(ProfessorActivity.this)
+                        .professorWithCoursesDao().getProfessors();
+                for (ProfessorWithCourses professorWithCourses : professorsWithCourses){
+                    Log.d(TAG," Professor name: "+professorWithCourses.professor.getName()+" , number courses: "+professorWithCourses.courses.size());
+                }
+            }
+        }).subscribeOn(Schedulers.io()).subscribe();
     }
 
 

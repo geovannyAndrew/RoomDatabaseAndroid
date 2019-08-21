@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editIdLanguage" />
 
     <Button
-        android:id="@+id/buttonGetProfessor"
+        android:id="@+id/buttonGetLanguagesByProfessor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -59,14 +59,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Button"
+        android:text="Languages by Professor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonSaveProfessorLanguage" />
 
     <Button
-        android:id="@+id/buttonGetLanguage"
+        android:id="@+id/buttonGetProfessorByLanguages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -74,9 +74,23 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Button"
+        android:text="Professors by Language"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGetProfessor" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGetLanguagesByProfessor" />
+
+    <Button
+        android:id="@+id/buttonGetAllProfessorsLanguages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Get All ProfessorsLanguages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGetProfessorByLanguages" />
 </androidx.constraintlayout.widget.ConstraintLayout>
